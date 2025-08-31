@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:TechFitCustomer.Models"
+    xmlns:main="clr-namespace:TechFitCustomer.Features.Main"
+    x:Class="TechFitCustomer.Features.Main.MainPage"
+    x:DataType="main:MainPageViewModel">
+
+    <ScrollView>
+
+        <Grid
+            RowDefinitions="Auto, *"
+            RowSpacing="12">
+
+            <Button
+                Grid.Row="0"
+                HorizontalOptions="Center"
+                WidthRequest="200"
+                Text="Adicionar Cliente" />
+
+            <CollectionView
+                Grid.Row="1"
+                ItemsSource="{Binding Customers}"
+                SelectionMode="None">
+
+                <CollectionView.ItemTemplate>
+
+                    <DataTemplate
+                        x:DataType="models:CustomerModel">
+
+                        <Grid
+                            ColumnDefinitions="*, Auto"
+                            Padding="8, 0">
+
+                            <HorizontalStackLayout
+                                Grid.Column="0"
+                                Spacing="5"
+                                HorizontalOptions="Start">
+
+                                <Label
+                                    VerticalTextAlignment="Center"
+                                    Text="{Binding Name}" />
+
+                                <Label
+                                    VerticalTextAlignment="Center"
+                                    Text="{Binding Lastname}" />
+
+                                <Label
+                                    VerticalTextAlignment="Center"
+                                    Text="{Binding Age}" />
+
+                                <Label
+                                    VerticalTextAlignment="Center"
+                                    Text="{Binding Address}" />
+
+                            </HorizontalStackLayout>
+
+                            <HorizontalStackLayout
+                                Grid.Column="1"
+                                Spacing="8"
+                                HorizontalOptions="End">
+
+                                <Button
+                                    Text="Editar"
+                                    Command="{Binding  Source={RelativeSource AncestorType={x:Type main:MainPageViewModel}}, Path=EditCommand}"
+                                    CommandParameter="{Binding .}" />
+
+                                <Button
+                                    Text="Remover"
+                                    Command="{Binding  Source={RelativeSource AncestorType={x:Type main:MainPageViewModel}}, Path=DeleteCommand}"
+                                    CommandParameter="{Binding}" />
+
+                            </HorizontalStackLayout>
+
+                        </Grid>
+
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </Grid>
+
+    </ScrollView>
+
+</ContentPage>
