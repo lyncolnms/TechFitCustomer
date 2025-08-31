@@ -1,10 +1,12 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using TechFitCustomer.Features.Base;
+using TechFitCustomer.Features.Customer.Add;
 using TechFitCustomer.Models;
 
 namespace TechFitCustomer.Features.Main;
 
-public partial class MainPageViewModel : ObservableObject
+public partial class MainPageViewModel : BasePageViewModel
 {
     [ObservableProperty] private List<CustomerModel> _customers = [];
 
@@ -22,9 +24,9 @@ public partial class MainPageViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private async Task Add()
+    private void Add()
     {
-        await Application.Current?.MainPage.DisplayAlert("Add", "Add customer", "OK");
+        Application.Current?.OpenWindow(new Window(new AddCustomerPage()));
     }
 
     [RelayCommand]
