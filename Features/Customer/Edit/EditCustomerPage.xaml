@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:customer="clr-namespace:TechFitCustomer.Features.Customer"
+             xmlns:views="clr-namespace:TechFitCustomer.Features.Customer.Views"
+             x:Class="TechFitCustomer.Features.Customer.Edit.EditCustomerPage">
+
+    <ScrollView>
+        <views:CustomerFormView
+            Name="{Binding Name, Mode=TwoWay}"
+            Lastname="{Binding Lastname, Mode=TwoWay}"
+            Age="{Binding Age, Mode=TwoWay}"
+            Address="{Binding Address, Mode=TwoWay}"
+            SaveCommand="{Binding SaveCommand}"
+            FormTitle="Editar Cliente"
+            ButtonText="Atualizar" />
+    </ScrollView>
+
+</ContentPage>
