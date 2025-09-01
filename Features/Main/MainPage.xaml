@@ -6,7 +6,8 @@
     xmlns:models="clr-namespace:TechFitCustomer.Models"
     xmlns:main="clr-namespace:TechFitCustomer.Features.Main"
     x:Class="TechFitCustomer.Features.Main.MainPage"
-    x:DataType="main:MainPageViewModel">
+    x:DataType="main:MainPageViewModel"
+    x:Name="MainPageRoot">
 
     <ScrollView>
 
@@ -25,6 +26,34 @@
                 Grid.Row="1"
                 ItemsSource="{Binding Customers}"
                 SelectionMode="None">
+
+                <CollectionView.EmptyView>
+                    
+                    <VerticalStackLayout 
+                        HorizontalOptions="CenterAndExpand"
+                        Spacing="20">
+                        
+                        <Label 
+                            Text="📋" 
+                            FontSize="64" 
+                            HorizontalOptions="Center" />
+                            
+                        <Label 
+                            Text="Nenhum cliente cadastrado" 
+                            FontSize="18" 
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            TextColor="Gray" />
+                            
+                        <Label 
+                            Text="Clique em 'Adicionar Cliente' para começar" 
+                            FontSize="14" 
+                            HorizontalOptions="Center"
+                            TextColor="LightGray" />
+                            
+                    </VerticalStackLayout>
+                    
+                </CollectionView.EmptyView>
 
                 <CollectionView.ItemTemplate>
 
@@ -65,13 +94,13 @@
 
                                 <Button
                                     Text="Editar"
-                                    Command="{Binding  Source={RelativeSource AncestorType={x:Type main:MainPageViewModel}}, Path=EditCommand}"
+                                    Command="{Binding Source={x:Reference MainPageRoot}, Path=BindingContext.EditCommand}"
                                     CommandParameter="{Binding .}" />
 
                                 <Button
                                     Text="Remover"
-                                    Command="{Binding  Source={RelativeSource AncestorType={x:Type main:MainPageViewModel}}, Path=DeleteCommand}"
-                                    CommandParameter="{Binding}" />
+                                    Command="{Binding Source={x:Reference MainPageRoot}, Path=BindingContext.DeleteCommand}"
+                                    CommandParameter="{Binding .}" />
 
                             </HorizontalStackLayout>
 
