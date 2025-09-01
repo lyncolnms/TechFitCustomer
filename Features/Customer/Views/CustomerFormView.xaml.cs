@@ -4,7 +4,6 @@ namespace TechFitCustomer.Features.Customer.Views;
 
 public partial class CustomerFormView : ContentView
 {
-    // Bindable properties for customer data
     public static readonly BindableProperty NameProperty =
         BindableProperty.Create(nameof(Name), typeof(string), typeof(CustomerFormView), string.Empty, BindingMode.TwoWay);
 
@@ -20,13 +19,15 @@ public partial class CustomerFormView : ContentView
     public static readonly BindableProperty SaveCommandProperty =
         BindableProperty.Create(nameof(SaveCommand), typeof(ICommand), typeof(CustomerFormView));
 
+    public static readonly BindableProperty CancelCommandProperty =
+        BindableProperty.Create(nameof(CancelCommand), typeof(ICommand), typeof(CustomerFormView));
+
     public static readonly BindableProperty FormTitleProperty =
         BindableProperty.Create(nameof(FormTitle), typeof(string), typeof(CustomerFormView), "Adicionar Cliente");
 
     public static readonly BindableProperty ButtonTextProperty =
         BindableProperty.Create(nameof(ButtonText), typeof(string), typeof(CustomerFormView), "Salvar");
 
-    // Properties that expose the bindable properties
     public string Name
     {
         get => (string)GetValue(NameProperty);
@@ -55,6 +56,12 @@ public partial class CustomerFormView : ContentView
     {
         get => (ICommand)GetValue(SaveCommandProperty);
         set => SetValue(SaveCommandProperty, value);
+    }
+
+    public ICommand CancelCommand
+    {
+        get => (ICommand)GetValue(CancelCommandProperty);
+        set => SetValue(CancelCommandProperty, value);
     }
 
     public string FormTitle
