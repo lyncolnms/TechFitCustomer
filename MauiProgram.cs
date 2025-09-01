@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using TechFitCustomer.DependencyInjections.Pages;
+using TechFitCustomer.DependencyInjections.Services;
 
 namespace TechFitCustomer;
 
@@ -16,8 +17,11 @@ public static class MauiProgram
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-            })
-            .Services.AddPagesDependencyInjections();
+            }); 
+        
+        builder.Services.RegisterPagesDependencyInjections(); 
+        builder.Services.RegisterServicesDependencyInjections();
+        
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

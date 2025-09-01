@@ -7,7 +7,7 @@ namespace TechFitCustomer.DependencyInjections.Pages;
 
 public static class PagesDependencyInjections
 {
-    public static void AddPagesDependencyInjections(this IServiceCollection services)
+    public static void RegisterPagesDependencyInjections(this IServiceCollection services)
     {
         services.AddTransient<MainPage, MainPageViewModel>();
         services.AddTransient<AddCustomerPage, AddCustomerPageViewModel>();
