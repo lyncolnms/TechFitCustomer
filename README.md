@@ -10,7 +10,6 @@ cadastro.
 
 ## Demonstração
 
-![Captura de tela 2025-09-01 030647.png](Media/Captura%20de%20tela%202025-09-01%20030647.png)
 ![Captura de tela 2025-09-01 030659.png](Media/Captura%20de%20tela%202025-09-01%20030659.png)
 ![Captura de tela 2025-09-01 030714.png](Media/Captura%20de%20tela%202025-09-01%20030714.png)
 ![Captura de tela 2025-09-01 030734.png](Media/Captura%20de%20tela%202025-09-01%20030734.png)
