@@ -1,6 +1,6 @@
 ﻿# Fit Técnico
 
-## Projeto para a plataforma Windows, utilizando .NET Maui na versão 9,
+## Projeto para a plataforma Windows, utilizando .NET Maui na versão 9
 
 Implementar um cadastro de clientes, onde teremos uma tela que permitirá ao usuário incluir, modificar, excluir e listar os clientes que temos em nosso
 cadastro.
