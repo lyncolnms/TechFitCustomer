@@ -12,15 +12,16 @@ namespace TechFitCustomer.Features.Main;
 public partial class MainPageViewModel : BasePageViewModel, IRecipient<CustomerChangedMessage>
 {
     private readonly IPreferenceService _preferenceService;
-    
+    private readonly INavigationService _navigationService;
+
     [ObservableProperty] private List<CustomerModel> _customers = [];
 
-    public MainPageViewModel(IPreferenceService preferenceService)
+    public MainPageViewModel(IPreferenceService preferenceService, INavigationService navigationService) : base(navigationService)
     {
         _preferenceService = preferenceService;
+        _navigationService = navigationService;
         LoadCustomers();
-        
-        // Registrar para receber mensagens de mudança de cliente
+
         WeakReferenceMessenger.Default.Register(this);
     }
 
@@ -63,8 +64,9 @@ public partial class MainPageViewModel : BasePageViewModel, IRecipient<CustomerC
 #endif
             
             window.Stopped += (_, _) => RefreshCustomers();
-            
-            Application.Current?.OpenWindow(window);
+
+            _navigationService.OpenNewWindowAsync(nameof(AddCustomerPage));
+            // Application.Current?.OpenWindow(window);
         }
     }
 

@@ -7,10 +7,12 @@ using TechFitCustomer.Services;
 
 namespace TechFitCustomer.Features.Customer.Edit;
 
-public partial class EditCustomerPageViewModel(IPreferenceService preferenceService) : BasePageViewModel
+public partial class EditCustomerPageViewModel(
+    IPreferenceService preferenceService,
+    INavigationService navigationService) : BasePageViewModel(navigationService)
 {
     private CustomerModel? _originalCustomer;
-    
+
     [ObservableProperty] private string _name = string.Empty;
     [ObservableProperty] private string _lastname = string.Empty;
     [ObservableProperty] private string _age = string.Empty;
@@ -43,9 +45,9 @@ public partial class EditCustomerPageViewModel(IPreferenceService preferenceServ
         }
 
         List<CustomerModel> customers = preferenceService.Get<List<CustomerModel>>("customers") ?? [];
-        
+
         int customerIndex = customers.FindIndex(c => c.Id == _originalCustomer.Id);
-        
+
         if (customerIndex >= 0)
         {
             customers[customerIndex] = new CustomerModel
@@ -56,7 +58,7 @@ public partial class EditCustomerPageViewModel(IPreferenceService preferenceServ
                 Age = ageValue,
                 Address = Address.Trim()
             };
-            
+
             preferenceService.Set("customers", customers);
 
             WeakReferenceMessenger.Default.Send(new CustomerChangedMessage());

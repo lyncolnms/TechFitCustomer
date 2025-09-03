@@ -7,7 +7,9 @@ using TechFitCustomer.Services;
 
 namespace TechFitCustomer.Features.Customer.Add;
 
-public partial class AddCustomerPageViewModel(IPreferenceService preferenceService) : BasePageViewModel
+public partial class AddCustomerPageViewModel(
+    IPreferenceService preferenceService,
+    INavigationService navigationService) : BasePageViewModel(navigationService)
 {
     [ObservableProperty] private string _name = string.Empty;
     [ObservableProperty] private string _lastname = string.Empty;
@@ -22,14 +24,16 @@ public partial class AddCustomerPageViewModel(IPreferenceService preferenceServi
 
         if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(Lastname))
         {
-            if (currentPage is not null) await currentPage.DisplayAlert("Erro", "Nome e Sobrenome são obrigatórios", "OK");
+            if (currentPage is not null)
+                await currentPage.DisplayAlert("Erro", "Nome e Sobrenome são obrigatórios", "OK");
 
             return;
         }
 
         if (!int.TryParse(Age, out int ageValue) || ageValue <= 0)
         {
-            if (currentPage is not null) await currentPage.DisplayAlert("Erro", "Idade deve ser um número válido maior que zero", "OK");
+            if (currentPage is not null)
+                await currentPage.DisplayAlert("Erro", "Idade deve ser um número válido maior que zero", "OK");
 
             return;
         }
@@ -43,13 +47,13 @@ public partial class AddCustomerPageViewModel(IPreferenceService preferenceServi
         };
 
         List<CustomerModel> existingCustomers = preferenceService.Get<List<CustomerModel>>("customers") ?? [];
-        
+
         existingCustomers.Add(newCustomer);
-        
+
         preferenceService.Set("customers", existingCustomers);
 
         WeakReferenceMessenger.Default.Send(new CustomerChangedMessage());
-        
+
         if (currentPage is not null) await currentPage.DisplayAlert("Sucesso", "Cliente adicionado com sucesso!", "OK");
 
         IReadOnlyList<Window>? windows = Application.Current?.Windows;
@@ -62,7 +66,7 @@ public partial class AddCustomerPageViewModel(IPreferenceService preferenceServi
 
     [RelayCommand]
     private void Cancel()
-    { 
+    {
         IReadOnlyList<Window>? windows = Application.Current?.Windows;
         Window? window = windows?.FirstOrDefault(w => w.Page is AddCustomerPage);
         if (window is not null)
